@@ -6,8 +6,8 @@ ARG DPDK_BRANCH=main
 
 ARG PKTGEN_BRANCH=pktgen-20.10.0
 
-ENV DPDK_BRANCH $DPDK_BRANCH
-ENV PKTGEN_BRANCH $PKTGEN_BRANCH
+ENV DPDK_BRANCH main
+ENV PKTGEN_BRANCH pktgen-21.02.0
 
 RUN apt-get update -y
 
@@ -20,6 +20,8 @@ RUN apt-get install -y python3 python3-pip python3-setuptools python3-wheel
 RUN apt-get install -y git wget unzip
 
 RUN pip3 install meson
+
+RUN apt-get install -y python3-pyelftools
 
 COPY build.sh /root/
 

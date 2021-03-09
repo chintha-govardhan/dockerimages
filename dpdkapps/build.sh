@@ -15,6 +15,8 @@ unzip ninja-linux.zip -d /usr/bin/
 git clone https://github.com/DPDK/dpdk.git
 cd dpdk && git checkout "$dpdk_branch" && meson build && ninja -C build install
 
+cd /root
+
 git clone https://github.com/pktgen/Pktgen-DPDK.git
 cd Pktgen-DPDK && git checkout "$pktgen_branch" && meson build && ninja -C build install 
 
