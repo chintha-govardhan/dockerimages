@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eo pipefail
+
 dpdk_branch=$1
 pktgen_branch=$2
 
@@ -8,7 +10,7 @@ echo "PKTGEN Branch: $pktgen_branch"
 
 cd /root
 
-wget https://github.com/ninja-build/ninja/releases/download/v1.7.1/ninja-linux.zip
+wget https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip
 
 unzip ninja-linux.zip -d /usr/bin/
 

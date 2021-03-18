@@ -2,11 +2,11 @@ FROM ubuntu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG DPDK_BRANCH=main
+ARG DPDK_BRANCH=v21.02
 
-ARG PKTGEN_BRANCH=pktgen-20.10.0
+ARG PKTGEN_BRANCH=pktgen-21.02.0
 
-ENV DPDK_BRANCH main
+ENV DPDK_BRANCH v21.02
 ENV PKTGEN_BRANCH pktgen-21.02.0
 
 RUN apt-get update -y
