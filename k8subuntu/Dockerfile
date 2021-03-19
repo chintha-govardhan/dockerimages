@@ -16,6 +16,4 @@ RUN apt install -y curl
 
 RUN apt install -y nginx
 
-CMD ["service", "nginx", "start"]
-
-CMD ["sleep", "infinity"]
+CMD ["service", "nginx", "start", "&", "sleep", "infinity"]
