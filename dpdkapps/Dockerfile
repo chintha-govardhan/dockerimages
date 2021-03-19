@@ -28,3 +28,5 @@ COPY build.sh /root/
 RUN chmod +x /root/build.sh
 
 RUN bash -x /root/build.sh $DPDK_BRANCH $PKTGEN_BRANCH
+
+CMD bash -c "sleep infinity"
