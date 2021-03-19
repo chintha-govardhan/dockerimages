@@ -1,0 +1,3 @@
+This is a docker image with
+* compiled dpdk package with testpmd and other default apps
+* compiled dpdk pktgen
