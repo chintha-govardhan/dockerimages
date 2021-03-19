@@ -16,4 +16,6 @@ RUN apt install -y curl
 
 RUN apt install -y nginx
 
-CMD ["service", "nginx", "start", "&", "sleep", "infinity"]
+COPY startup.sh /startup.sh
+
+CMD bash -x /startup.sh
