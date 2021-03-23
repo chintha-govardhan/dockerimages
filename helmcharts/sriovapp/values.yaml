@@ -1,0 +1,3 @@
+
+NetworkName: sriov-network-1
+NetworkResourceName: intel.com/intel_sriov_netdevice

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-sriovapp-pod-2
+  annotations:
+     k8s.v1.cni.cncf.io/networks: "{{ .Values.NetworkName }}"
+spec:
+  containers:
+   - name: {{ .Release.Name }}-c2
+     image: centos/tools
+     imagePullPolicy: IfNotPresent
+     command: [ "/bin/bash", "-c", "--" ]
+     args: [ "while true; do sleep 300000; done;" ]
+     securityContext:
+       privileged: false
+       capabilities:
+          add: ["IPC_LOCK", "NET_ADMIN", "NET_RAW"]
+     resources:
+       requests:
+         {{ .Values.NetworkResourceName }}: '1'
+       limits:
+         {{ .Values.NetworkResourceName }}: '1'
