@@ -1,0 +1,4 @@
+
+Pray everything works.
+
+Log in to adminer using the username 'root' and the password '{{ .Values.dbPassword }}'.

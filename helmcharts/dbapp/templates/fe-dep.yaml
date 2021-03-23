@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-fe-dep
+  labels:
+    day: day3
+    sample: dbapp
+    chart: {{ .Chart.Name }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        day: day3
+        sample: dbapp
+        layer: frontend
+        chart: {{ .Chart.Name }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: webserver
+          image: adminer:4.7
+          env:
+            - name: ADMINER_DEFAULT_SERVER
+              value: {{ .Release.Name }}-db-svc
+  selector:
+    matchLabels:
+      day: day3
+      sample: dbapp
+      layer: frontend
+      chart: {{ .Chart.Name }}
+      release: {{ .Release.Name }}

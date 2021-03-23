@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-db-dep
+  labels:
+    day: day3
+    sample: dbapp
+    chart: {{ .Chart.Name }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        day: day3
+        sample: dbapp
+        layer: backend
+        chart: {{ .Chart.Name }}
+        release: {{ .Release.Name }}
+    spec:
+      volumes:
+        - name: dbvol
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-db-pvc
+      containers:
+        - name: database
+          image: mysql:5.7
+          volumeMounts:
+            - name: dbvol
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.dbPassword }}
+  selector:
+    matchLabels:
+      day: day3
+      sample: dbapp
+      layer: backend
+      chart: {{ .Chart.Name }}
+      release: {{ .Release.Name }}
