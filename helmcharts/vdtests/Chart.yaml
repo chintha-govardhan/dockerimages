@@ -28,3 +28,7 @@ dependencies:
    condition: sriovapp.enabled
  - name: dpdkapp
    condition: dpdkapp.enabled
+ - name: cpupinapp
+   condition: cpupinapp.enabled
+ - name: hugepageapp
+   condition: hugepageapp.enabled

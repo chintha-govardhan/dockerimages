@@ -12,3 +12,12 @@ dpdkapp:
   enabled: false
   NetworkResourceName: intel.com/dpdk_netdevice
   image: quay.io/cgrepo/dpdk-apps:21.02
+
+cpupinapp:
+  enabled: false
+  cpucount: 1
+
+hugepageapp:
+  enabled: false
+  cpucount: 1
+  hugepages: 1Gi
