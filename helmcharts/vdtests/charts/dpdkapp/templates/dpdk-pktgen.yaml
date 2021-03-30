@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-dpdkapp-pktgen
+  annotations:
+    k8s.v1.cni.cncf.io/networks: "{{ .Release.Name }}-dpdk-network"
+spec:
+   restartPolicy: Never
+   containers:
+   - name: {{ .Release.Name }}-dpdkapp-pktgen
+     image: {{ .Values.image }}
+     volumeMounts:
+     - mountPath: /mnt/huge-1048576kB
+       name: {{ .Release.Name }}-hugepage
+     stdin: true
+     tty: true
+     securityContext:
+        privileged: true
+        allowPrivilegeEscalation: true
+        capabilities:
+          add: ["IPC_LOCK", "NET_ADMIN", "NET_RAW"]
+     resources:
+       requests:
+         cpu: 5
+         memory: 10Gi
+         hugepages-1Gi: 8Gi
+         {{ .Values.NetworkResourceName }}: '2'
+       limits:
+         cpu: 5
+         hugepages-1Gi: 8Gi
+         memory: 10Gi
+         {{ .Values.NetworkResourceName }}: '2'
+   volumes:
+    - name: {{ .Release.Name }}-hugepage
+      emptyDir:
+        medium: HugePages

@@ -1,0 +1,2 @@
+NetworkResourceName: intel.com/dpdk_netdevice
+image: quay.io/cgrepo/dpdk-apps:21.02

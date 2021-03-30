@@ -1,0 +1,14 @@
+sriovapp:
+  enabled: false
+  NetworkResourceName: intel.com/sriov_netdevice
+  # if vlan is not required. keep value empty
+  vlan: 100
+  subnet: 192.168.100.0/24
+  startip: 192.168.100.10
+  endip: 192.168.100.50
+  gateway: 192.168.100.1
+
+dpdkapp:
+  enabled: false
+  NetworkResourceName: intel.com/dpdk_netdevice
+  image: quay.io/cgrepo/dpdk-apps:21.02
