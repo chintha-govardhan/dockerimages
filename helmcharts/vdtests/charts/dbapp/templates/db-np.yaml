@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+   name: {{ .Release.Name }}-db-np
+   labels:
+     app: {{ .Release.Name }}-dbapp
+     chart: {{ .Chart.Name }}
+     release: {{ .Release.Name }}
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchLabels:
+       app: {{ .Release.Name }}-dbapp
+       layer: backend 
+       chart: {{ .Chart.Name }}
+       release: {{ .Release.Name }}
+  ingress:
+  - from:
+     - podSelector:
+         matchLabels:
+           app: {{ .Release.Name }}-dbapp
+           layer: frontend
+           chart: {{ .Chart.Name }}
+           release: {{ .Release.Name }}
+    ports:
+    - port: 3306

@@ -21,3 +21,9 @@ hugepageapp:
   enabled: false
   cpucount: 1
   hugepages: 1Gi
+
+dbapp:
+  enabled: false
+  nodePort: 31000
+  dbPassword: something
+  storageClass: vsphere-sc
