@@ -5,4 +5,4 @@
 nodePort: 31000
 dbPassword: something
 storageClass:
-
+fereplicas: 1

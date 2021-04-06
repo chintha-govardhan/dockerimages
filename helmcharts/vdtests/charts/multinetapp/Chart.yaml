@@ -1,5 +1,5 @@
 apiVersion: v2
-name: vdtests
+name: multinetapp
 description: A Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
@@ -22,17 +22,3 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.0.0"
-
-dependencies:
- - name: sriovapp
-   condition: sriovapp.enabled
- - name: dpdkapp
-   condition: dpdkapp.enabled
- - name: cpupinapp
-   condition: cpupinapp.enabled
- - name: hugepageapp
-   condition: hugepageapp.enabled
- - name: dbapp
-   condition: dbapp.enabled
- - name: multinetapp
-   condition: multinetapp.enabled

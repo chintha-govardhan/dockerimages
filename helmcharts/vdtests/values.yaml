@@ -27,3 +27,11 @@ dbapp:
   nodePort: 31000
   dbPassword: something
   storageClass: vsphere-sc
+  fereplicas: 1
+
+multinetapp:
+  enabled: false
+  subnet: 192.167.7.0/24
+  startip: 192.167.7.20
+  endip: 192.167.7.100
+  gateway: 192.167.7.1
