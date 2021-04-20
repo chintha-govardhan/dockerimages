@@ -9,7 +9,7 @@ spec:
        medium: HugePages
   containers:
   - name: c1
-    image: centos/tools
+    image: {{ .Values.image }}
     imagePullPolicy: IfNotPresent
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "while true; do sleep 300000; done;" ]

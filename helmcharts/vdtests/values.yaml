@@ -1,5 +1,6 @@
 sriovapp:
   enabled: false
+  image: quay.io/cgrepo/centos-tools
   NetworkResourceName: intel.com/sriov_netdevice
   # if vlan is not required. keep value empty
   vlan: 100
@@ -12,18 +13,25 @@ dpdkapp:
   enabled: false
   NetworkResourceName: intel.com/dpdk_netdevice
   image: quay.io/cgrepo/dpdk-apps:21.02
+  # if vlan is not required. keep value empty
+  vlan: 100
+  windriverisolcpus: false
 
 cpupinapp:
   enabled: false
+  image: quay.io/cgrepo/centos-tools
   cpucount: 1
 
 hugepageapp:
   enabled: false
+  image: quay.io/cgrepo/centos-tools
   cpucount: 1
   hugepages: 1Gi
 
 dbapp:
   enabled: false
+  feimage: quay.io/cgrepo/adminer:4.7
+  dbimage: quay.io/cgrepo/mysql:5.6
   nodePort: 31000
   dbPassword: something
   storageClass: vsphere-sc
@@ -31,6 +39,7 @@ dbapp:
 
 multinetapp:
   enabled: false
+  image: quay.io/cgrepo/centos-tools
   subnet: 192.167.7.0/24
   startip: 192.167.7.20
   endip: 192.167.7.100

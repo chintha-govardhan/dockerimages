@@ -3,7 +3,10 @@ kind: Pod
 metadata:
   name: {{ .Release.Name }}-dpdkapp-pktgen
   annotations:
-    k8s.v1.cni.cncf.io/networks: "{{ .Release.Name }}-dpdk-network"
+     k8s.v1.cni.cncf.io/networks: '[
+        { "name": "{{ .Release.Name }}-dpdk-network" },
+        { "name": "{{ .Release.Name }}-dpdk-network" }
+     ]'
 spec:
    restartPolicy: Never
    containers:
@@ -21,15 +24,23 @@ spec:
           add: ["IPC_LOCK", "NET_ADMIN", "NET_RAW"]
      resources:
        requests:
-         cpu: 5
-         memory: 10Gi
+         memory: 1Gi
          hugepages-1Gi: 8Gi
          {{ .Values.NetworkResourceName }}: '2'
+         {{- if .Values.windriverisolcpus }}
+         windriver.com/isolcpus: 5
+         {{- else }}
+         cpu: 5
+         {{- end }}
        limits:
-         cpu: 5
          hugepages-1Gi: 8Gi
-         memory: 10Gi
+         memory: 1Gi
          {{ .Values.NetworkResourceName }}: '2'
+         {{- if .Values.windriverisolcpus }}
+         windriver.com/isolcpus: 5
+         {{- else }}
+         cpu: 5
+         {{- end }}
    volumes:
     - name: {{ .Release.Name }}-hugepage
       emptyDir:

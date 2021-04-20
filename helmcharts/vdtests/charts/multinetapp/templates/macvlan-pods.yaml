@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: {{ .Release.Name }}-multi-net-pod-01
-    image: docker.io/centos/tools:latest
+    image: {{ .Values.image }}
     command:
     - /sbin/init
 
@@ -21,7 +21,7 @@ metadata:
 spec:
   containers:
   - name: {{ .Release.Name }}-multi-net-pod-02
-    image: docker.io/centos/tools:latest
+    image: {{ .Values.image }}
     command:
     - /sbin/init
 

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: webserver
-          image: adminer:4.7
+          image: {{ .Values.feimage }}
           env:
             - name: ADMINER_DEFAULT_SERVER
               value: {{ .Release.Name }}-db-svc

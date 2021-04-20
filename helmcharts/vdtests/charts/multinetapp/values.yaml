@@ -1,3 +1,5 @@
+image: quay.io/cgrepo/centos-tools
+macvlan-intf: eth0
 subnet: 192.167.7.0/24
 startip: 192.167.7.20
 endip: 192.167.7.100
