@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM quay.io/cgrepo/ubuntu:latest
 
 RUN apt update -y 
 
@@ -15,6 +15,8 @@ RUN apt install -y iputils-ping
 RUN apt install -y curl
 
 RUN apt install -y nginx
+
+RUN apt install -y pciutils
 
 COPY startup.sh /startup.sh
 
