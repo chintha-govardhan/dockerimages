@@ -29,4 +29,7 @@ RUN chmod +x /root/build.sh
 
 RUN bash -x /root/build.sh $DPDK_BRANCH $PKTGEN_BRANCH
 
+COPY run_pktgen.py /root/
+COPY run_testpmd.py /root/
+
 CMD bash -c "sleep infinity"
