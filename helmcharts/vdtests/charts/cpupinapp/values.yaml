@@ -1,3 +1,4 @@
 
 cpucount: 1
 image: quay.io/cgrepo/nginx
+windriverisolcpus: false

@@ -21,6 +21,7 @@ cpupinapp:
   enabled: false
   image: quay.io/cgrepo/centos-tools
   cpucount: 1
+  windriverisolcpus: false
 
 hugepageapp:
   enabled: false
