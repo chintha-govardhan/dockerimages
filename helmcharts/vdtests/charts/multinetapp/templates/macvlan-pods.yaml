@@ -1,27 +1,44 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ .Release.Name }}-multi-net-pod-01
-  annotations:
-    k8s.v1.cni.cncf.io/networks: {{ .Release.Name }}-macvlan-net0
 spec:
-  containers:
-  - name: {{ .Release.Name }}-multi-net-pod-01
-    image: {{ .Values.image }}
-    command:
-    - /sbin/init
-
+  replicas: 1
+  template:
+     metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: {{ .Release.Name }}-macvlan-net0
+      labels:
+       appname: macvlan1
+     spec:
+       containers:
+       - name: {{ .Release.Name }}-multi-net-pod-01
+         image: {{ .Values.image }}
+         command:
+         - /sbin/init
+  selector:
+    matchLabels:
+     appname: macvlan1
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ .Release.Name }}-multi-net-pod-02
-  annotations:
-    k8s.v1.cni.cncf.io/networks: {{ .Release.Name }}-macvlan-net0
 spec:
-  containers:
-  - name: {{ .Release.Name }}-multi-net-pod-02
-    image: {{ .Values.image }}
-    command:
-    - /sbin/init
+  replicas: 1
+  template:
+     metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: {{ .Release.Name }}-macvlan-net0
+      labels:
+        appname: macvlan2
+     spec:
+       containers:
+       - name: {{ .Release.Name }}-multi-net-pod-02
+         image: {{ .Values.image }}
+         command:
+         - /sbin/init
+  selector:
+    matchLabels:
+     appname: macvlan2
 

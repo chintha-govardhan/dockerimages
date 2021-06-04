@@ -1,28 +1,37 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
    name: {{ .Release.Name }}-hugepage-pod
 spec:
-  volumes:
-   - name: {{ .Release.Name }}-hugepage
-     emptyDir:
-       medium: HugePages
-  containers:
-  - name: c1
-    image: {{ .Values.image }}
-    imagePullPolicy: IfNotPresent
-    command: [ "/bin/bash", "-c", "--" ]
-    args: [ "while true; do sleep 300000; done;" ]
-    volumeMounts:
-    - mountPath: /mnt/huge-1048576kB
-      name: {{ .Release.Name }}-hugepage
-    resources:
-       requests:
-         cpu: {{ .Values.cpucount}}
-         memory: 250Mi
-         hugepages-1Gi: {{ .Values.hugepages}}
-       limits:
-         cpu: {{ .Values.cpucount}}
-         memory: 250Mi
-         hugepages-1Gi: {{ .Values.hugepages}}
+  replicas: 1
+  template:
+     metadata:
+      labels:
+       appname: hugepageapp
+     spec:
+       volumes:
+        - name: {{ .Release.Name }}-hugepage
+          emptyDir:
+            medium: HugePages
+       containers:
+       - name: c1
+         image: {{ .Values.image }}
+         imagePullPolicy: IfNotPresent
+         command: [ "/bin/bash", "-c", "--" ]
+         args: [ "while true; do sleep 300000; done;" ]
+         volumeMounts:
+         - mountPath: /mnt/huge-1048576kB
+           name: {{ .Release.Name }}-hugepage
+         resources:
+            requests:
+              cpu: {{ .Values.cpucount}}
+              memory: 250Mi
+              hugepages-1Gi: {{ .Values.hugepages}}
+            limits:
+              cpu: {{ .Values.cpucount}}
+              memory: 250Mi
+              hugepages-1Gi: {{ .Values.hugepages}}
+  selector:
+    matchLabels:
+     appname: hugepageapp
 

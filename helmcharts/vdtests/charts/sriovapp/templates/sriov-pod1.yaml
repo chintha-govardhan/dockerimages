@@ -1,22 +1,31 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ .Release.Name }}-sriovapp-pod-1
-  annotations:
-     k8s.v1.cni.cncf.io/networks: "{{ .Release.Name }}-sriov-network"
 spec:
-  containers:
-   - name: {{ .Release.Name }}-c1
-     image: {{ .Values.image }}
-     imagePullPolicy: IfNotPresent
-     command: [ "/bin/bash", "-c", "--" ]
-     args: [ "while true; do sleep 300000; done;" ]
-     securityContext:
-       privileged: false
-       capabilities:
-          add: ["IPC_LOCK", "NET_ADMIN", "NET_RAW"]
-     resources:
-       requests:
-         {{ .Values.NetworkResourceName }}: '1'
-       limits:
-         {{ .Values.NetworkResourceName }}: '1'
+  replicas: 1
+  template:
+     metadata:
+      annotations:
+       k8s.v1.cni.cncf.io/networks: "{{ .Release.Name }}-sriov-network"
+      labels:
+       appname: sriovapp1
+     spec:
+       containers:
+        - name: {{ .Release.Name }}-c1
+          image: {{ .Values.image }}
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 300000; done;" ]
+          securityContext:
+            privileged: false
+            capabilities:
+               add: ["IPC_LOCK", "NET_ADMIN", "NET_RAW"]
+          resources:
+            requests:
+              {{ .Values.NetworkResourceName }}: '1'
+            limits:
+              {{ .Values.NetworkResourceName }}: '1'
+  selector:
+    matchLabels:
+     appname: sriovapp1

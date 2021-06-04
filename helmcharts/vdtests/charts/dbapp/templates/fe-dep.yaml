@@ -19,6 +19,9 @@ spec:
       containers:
         - name: webserver
           image: {{ .Values.feimage }}
+          command:
+          - php
+          args: ["-S", "0.0.0.0:8080", "-t", "/var/www/html"]
           env:
             - name: ADMINER_DEFAULT_SERVER
               value: {{ .Release.Name }}-db-svc
